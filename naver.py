@@ -13,5 +13,5 @@ def get_html(url):
 url = "https://www.naver.com/"
 html = get_html(url)
 soup = BeautifulSoup(html,'lxml') # BeautifulSoup 객체생성
-keywords = soup.find_all('a').find('span') # 데이터에서 태그와 클래스를 찾는 함수
+keywords = soup.find_all('a').find('ah_k') # 데이터에서 태그와 클래스를 찾는 함수
 print(keywords)
