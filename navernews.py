@@ -25,6 +25,10 @@ import urllib.request
 url = "https://news.naver.com/"
 html = urllib.request.urlopen(url)
 
-o = bs4.BeautifulSoup(html, "html.parser")
-l = o.find("div", {"class":"section section_wide"}).find_all("a", {"class" : "nclicks(rig.ranklif)"})
-print(l)
+soup = bs4.BeautifulSoup(html, "html.parser")
+news = soup.find("div", {"class":"section section_wide"}).find_all("a", {"class" : "nclicks(rig.ranklif)"})
+results = []
+for news_index in news:
+    # info = news_index.find("a")
+    print(news_index.text)
+    # print(_url)
