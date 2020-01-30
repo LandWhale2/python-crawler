@@ -18,12 +18,10 @@ webtoon_area = soup.find("table", {"class" : "viewList"}).find_all("td", {"class
 for webtoon_index in webtoon_area:
     info_soup = webtoon_index.find("a")
     _url = info_soup["href"]
-    print(info_soup.text)
     _text = info_soup.text.split(".")
-    print(_text)
     _title = ""
     _num = _text[0]
     if len(_text) > 1:
         _title = _text[1]
     webtoon_list.append((_num, _title, _url, ))
-# print(webtoon_list)
+print(webtoon_list)
