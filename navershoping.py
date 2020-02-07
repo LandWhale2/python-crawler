@@ -1,11 +1,10 @@
 import bs4
 import urllib.request
 
-url = "https://swindow.naver.com/designer/list/category"
+url = "https://search.shopping.naver.com/search/all.nhn?query=%EB%84%A4%EC%9D%B4%EB%B2%84+%EC%87%BC%ED%95%91&frm=NVSCPRO"
 html = urllib.request.urlopen(url)
 soup = bs4.BeautifulSoup(html, "html.parser")
-items = soup.find_all('li', {"class": "item  _NEW_ITEM_LAYOUT"})
-items = soup
+items = soup.find('li', {"class": "_model_list _itemSection"})
+item = items.find_all('a')
 print(items)
 
-#크롤링 시 숨겨진 url 도 있다
