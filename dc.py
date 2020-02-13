@@ -1,5 +1,14 @@
 import bs4
 import requests
+import pandas as pd
+import datetime
+
+
+
+DCUrl ='https://gall.dcinside.com/'
+
+Page_id = 'leemalnyeon'
+Page_index = '1'
 
 
 def get_html(pageid, pageindex):
@@ -17,36 +26,56 @@ def get_html(pageid, pageindex):
 
 
 
-
-html = get_html('leemalnyeon', '1')
-soup = bs4.BeautifulSoup(html, "lxml")
-items = soup.find_all('tr')
-results = list()
-for item in items:
-   #내용
-   content = item.find('a')
-   if content != None:
-      content_text = content.text
-   else:
-      content_text = "X"
-   #댓글
-   comment = item.find('span', {"class": "reply_num"})
-   if comment != None:
-      comment_text = comment.text
-   else:
-      comment_text = '[0]'
+def get_dc_list(items):
+   for item in items:
+      #내용
+      content = item.find('a')
+      if content != None:
+         content_text = content.text
+      else:
+         content_text = "X"
+      #댓글
+      comment = item.find('span', {"class": "reply_num"})
+      if comment != None:
+         comment_text = comment.text
+      else:
+         comment_text = '[0]'
    
-   nickname = item.find('span', {"class": "ip"})
-   if nickname != None:
-      nickname_text = nickname.text
-   else:
-      nickname = item.find('span', {"class": "nickname in"})
+      nickname = item.find('span', {"class": "ip"})
       if nickname != None:
          nickname_text = nickname.text
       else:
-         nickname_text = "X"
+         nickname = item.find('span', {"class": "nickname in"})
+         if nickname != None:
+            nickname_text = nickname.text
+         else:
+            nickname_text = "X"
+
+
+      url = item.find('a')
+      if url != None:
+         url = DCUrl +url["href"]
+      else:
+         url = "X"
+
+      results.append((content_text, comment_text, nickname_text, url))
    
-   results.append((content_text, comment_text, nickname_text))
+   return results
 
 
-print(results)
+
+
+
+results = list()
+html = get_html(Page_id, Page_index)
+soup = bs4.BeautifulSoup(html, "lxml")
+items = soup.find_all('tr')
+
+get_dc_list(items)
+
+
+
+data = pd.DataFrame(results)
+data.columns = ['content', 'comments', 'nickname', 'url']
+now = datetime.datetime.now()
+data.to_csv(f'DC-{Page_id}-{now}.csv', encoding='utf-8-sig')
