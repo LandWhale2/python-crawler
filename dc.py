@@ -7,12 +7,18 @@ import datetime
 
 DCUrl ='https://gall.dcinside.com/'
 
+
+#찾으려는 갤러리 id 를 입력 , 갤러리 url에서 찾을수있음
 Page_id = 'leemalnyeon'
 Page_index = '1'
 
 
-def get_html(pageid, pageindex):
-   url = 'https://gall.dcinside.com/mgallery/board/lists/'
+def get_html(pageid, pageindex, ismgallery):
+   if ismgallery == True:
+      url = 'https://gall.dcinside.com/mgallery/board/lists/'
+   else:
+      url = 'https://gall.dcinside.com/board/lists/'
+   
    payload = {'id': pageid, 'page' : pageindex}
    headers = {
        "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9",
@@ -67,7 +73,8 @@ def get_dc_list(items):
 
 
 results = list()
-html = get_html(Page_id, Page_index)
+# 마이너 갤러리는 3번째 인자에 True , 정식 갤러리는 False
+html = get_html(Page_id, Page_index, True)
 soup = bs4.BeautifulSoup(html, "lxml")
 items = soup.find_all('tr')
 
