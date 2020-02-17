@@ -29,7 +29,7 @@ options.add_argument("disable-gpu")
 
 
 #크롬 드라이버 로드
-driver = webdriver.Chrome('chromedriver', chrome_options=options)
+driver = webdriver.Chrome(executable_path='/Users/landwhale/Desktop/유틸/크롬/chromedriver', chrome_options=options)
 driver.implicitly_wait(3)
 
 
