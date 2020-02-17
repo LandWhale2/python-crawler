@@ -3,7 +3,7 @@ import time
 from selenium import webdriver
 
 Config = configparser.ConfigParser()
-Config.read('.user_info.conf')
+Config.read('user_info.conf')
 
 id = Config.get('dc', 'id')
 pw = Config.get('dc', 'pw')
