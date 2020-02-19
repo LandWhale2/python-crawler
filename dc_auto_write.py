@@ -23,7 +23,7 @@ options = webdriver.ChromeOptions()
 # 화면으로 창을 등장시켜 동작시키지않고 , 렌더링으로 가상으로 동작 시켜줌
 options.add_argument('headless')
 # 화면 사이즈 조정
-options.add_argument('window-size=800x600')
+options.add_argument('window-size=1920x1080')
 # gpu 가속 X
 options.add_argument("disable-gpu")
 
@@ -49,6 +49,10 @@ time.sleep(3)
 
 # 제목 입력을함
 driver.find_element_by_name('subject').send_keys(title)
+driver.find_element_by_name('name').send_keys(id)
+driver.find_element_by_name('password').send_keys(pw)
+
+
 # HTML으로 쓰기 방식 변경
 driver.find_element_by_id("tx_switchertoggle").click()
 # 1초 기다림
