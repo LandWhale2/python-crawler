@@ -34,14 +34,14 @@ driver.implicitly_wait(3)
 
 
 # 디시인사이드 로그인 페이지 로드
-# driver.get(url)
+driver.get(url)
 
 # 아이디
-# driver.find_element_by_name('user_id').send_keys(id)
+driver.find_element_by_name('user_id').send_keys(id)
 # 패스워드
-# driver.find_element_by_name('pw').send_keys(pw)
+driver.find_element_by_name('pw').send_keys(pw)
 # 로그인
-# driver.find_element_by_id('login_ok').click()
+driver.find_element_by_id('login_ok').click()
 
 # 글을 쓰고자 하는 갤러리로 이동
 driver.get(gall)
@@ -49,8 +49,6 @@ time.sleep(3)
 
 # 제목 입력을함
 driver.find_element_by_name('subject').send_keys(title)
-driver.find_element_by_name('name').send_keys(id)
-driver.find_element_by_name('password').send_keys(pw)
 
 
 # HTML으로 쓰기 방식 변경
