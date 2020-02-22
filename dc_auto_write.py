@@ -48,6 +48,7 @@ driver.get(gall)
 time.sleep(3)
 
 # 제목 입력을함
+# 익명용
 driver.find_element_by_name('subject').send_keys(title)
 driver.find_element_by_name('name').send_keys(id)
 driver.find_element_by_name('password').send_keys(pw)
